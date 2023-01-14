@@ -1,0 +1,73 @@
+package pages;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class CartPage extends PageBase {
+
+	public CartPage(WebDriver driver) {
+		super(driver);
+	}
+
+	// elements
+	@FindBy(id = "nav-cart")
+	public WebElement cartIcon;
+
+	@FindBy(xpath = "/html/body/div[1]/div[2]/div[3]/div[3]/div/div[2]/div[1]/div/form/div[2]/div[3]/div[4]/div/div[2]/ul/li[1]/span/a/span[1]/span/span[2]")
+	public WebElement titleOfAddItem;
+	// methods
+	public WebElement sendItemTexttogetItsWebElement(String itemText) {
+		WebElement addedItem = this.driver.findElement(By.xpath("//span[contains(text(),'"+itemText+"')]"));
+		return addedItem;
+	}
+
+	public void clickOnCartIcon() {
+		cartIcon.click();
+	}
+
+	public String getTextFromAddedItem(WebElement element)
+	{
+		return element.getText();
+	}
+	
+	public String checkcart() {
+		// - Go to the cart and check that item is added successfully
+		clickOnCartIcon();
+        WebElement addedItem = null;
+
+		 try {
+	            FileReader reader = new FileReader("MyFile.txt");
+	            BufferedReader bufferedReader = new BufferedReader(reader);
+	 
+	            String line;
+	            while ((line = bufferedReader.readLine()) != null) {
+	                System.out.println(line);
+	                
+	                addedItem = sendItemTexttogetItsWebElement(line.split(" ", 1)[0]);
+	            }
+	            reader.close();
+	 
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    
+	      return titleOfAddItem.getText();
+		 
+	}
+
+	
+	
+	public void waitAnElementUntillBeClickable(WebElement webElement) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(webElement));
+	}
+}

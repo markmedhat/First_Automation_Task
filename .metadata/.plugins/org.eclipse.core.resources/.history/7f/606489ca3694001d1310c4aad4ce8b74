@@ -1,0 +1,60 @@
+package pages;
+
+import java.io.IOException;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class CartPage extends PageBase {
+
+	public CartPage(WebDriver driver) {
+		super(driver);
+	}
+
+	// elements
+	@FindBy(id = "nav-cart")
+	WebElement cartIcon;
+
+	// methods
+	public WebElement sendItemText(String itemText) {
+		WebElement addedItem = this.driver.findElement(By.xpath("//span[contains(text(),'" + itemText + "')]"));
+		return addedItem;
+	}
+
+	public void clickOnCartIcon() {
+		cartIcon.click();
+	}
+
+	public boolean checkcart() {
+		// - Go to the cart and check that item is added successfully
+		clickOnCartIcon();
+		 try {
+	            FileReader reader = new FileReader("MyFile.txt");
+	            BufferedReader bufferedReader = new BufferedReader(reader);
+	 
+	            String line;
+	            WebElement addedItem;
+	            while ((line = bufferedReader.readLine()) != null) {
+	                System.out.println(line);
+	                
+	                addedItem = sendItemText(line);
+	            }
+	            reader.close();
+	 
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+		return addedItem.isEnabled();
+	}
+
+	public void waitAnElementUntillBeClickable(WebElement webElement) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(webElement));
+	}
+}

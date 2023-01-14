@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [void_automation_task]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="void_automation_task_testcases(failed)">
+    <classes>
+      <class name="tests.CarAccessoriesTest">
+        <methods>
+          <include name="clearEnvironment"/>
+          <include name="beforeEachTestCase"/>
+          <include name="TaskOne_FirstScenario"/>
+        </methods>
+      </class> <!-- tests.CarAccessoriesTest -->
+      <class name="tests.TodayDealsTest">
+        <methods>
+          <include name="clearEnvironment"/>
+          <include name="beforeEachTestCase"/>
+          <include name="TaskOne_SecondScenario"/>
+        </methods>
+      </class> <!-- tests.TodayDealsTest -->
+    </classes>
+  </test> <!-- void_automation_task_testcases(failed) -->
+</suite> <!-- Failed suite [void_automation_task] -->

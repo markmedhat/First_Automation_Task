@@ -1,0 +1,13 @@
+package Automation_Task_Assessment_vois.Automation_Task_Assessment;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello World!" );
+    }
+}

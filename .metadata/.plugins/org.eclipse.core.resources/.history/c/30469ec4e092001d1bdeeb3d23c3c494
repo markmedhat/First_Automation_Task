@@ -1,0 +1,28 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class CartPage extends PageBase{
+
+	public CartPage(WebDriver driver) {
+		super(driver);
+	}
+	
+	//elements
+	@FindBy(id = "nav-cart")
+	WebElement cartIcon ;
+
+	//methods
+	public void sendItemText(String itemText) {
+	WebElement addedItem = driver.findElement(By.xpath("//span[contains(text(),'"+itemText+"')]"));
+	}
+	public void clickOnCartIcon()
+	{
+		cartIcon.click();
+	}
+
+
+}

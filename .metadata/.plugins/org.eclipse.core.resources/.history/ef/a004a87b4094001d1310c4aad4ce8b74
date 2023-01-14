@@ -1,0 +1,102 @@
+package pages;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+public class TodayDealsPage extends PageBase {
+
+	public TodayDealsPage(WebDriver driver) {
+		super(driver);
+	}
+
+	// elements
+
+	@FindBy(xpath = "/html/body/div[1]/div[38]/div[3]/span[2]/div/a[3]/span[2]")
+	public WebElement country;
+	@FindBy(xpath = "/html/body/div[1]/div[2]/div/div[2]/div[2]/div[1]/span/span/span/span/span")
+	public WebElement country_list;
+//	@FindBy(xpath = "/html/body/div[4]/div/div/ul/li")
+//	public List<WebElement> countries;
+	@FindBy(xpath = "/html/body/div[3]/div/div/ul/li[6]/a")
+	WebElement egypt;
+	@FindBy(id = "icp-save-button")
+	WebElement goToWebsite;
+	@FindBy(id = "icp-nav-flyout")
+	WebElement countries_icon;
+	@FindBy(xpath = "/html/body/div[1]/header/div/div[3]/div[13]/div[2]/a[1]/span/i")
+	WebElement english_Language;
+	@FindBy(xpath = "/html/body/div[1]/div[21]/div/div/div/div[2]/div[2]/span[3]/ul/li")
+	public List<WebElement> filter_items;
+	@FindBy(xpath = "/html/body/div[1]/div[21]/div/div/div/div[2]/div[2]/span[1]/ul/li")
+	public List<WebElement> AvailableItems;
+
+	@FindBy(xpath = "	/html/body/div[1]/div[21]/div/div/div/div[2]/div[2]/span[6]/ul/li")
+	public List<WebElement> descountPercentage;
+
+	@FindBy(xpath = "//span[contains(text(),'10% off or more')]")
+	public WebElement ten_percentage_descount;
+	@FindBy(xpath = "//a[@href='#' and contains(text(),'3')]")
+	public WebElement thirdPage;
+//	@FindBy(xpath = "//a[@href='#' and contains(text(),'Next')]")
+//	public WebElement fourthPage;
+
+	// methods
+
+	public void clickOnten_percentage_descount() {
+		ten_percentage_descount.click();
+	}
+
+	public void clickOnthirdPage() {
+		thirdPage.click();
+	}
+//	public void clickOnfourthPage()
+//	{
+//		fourthPage.click();
+//	}
+
+	public void waitAnElementUntillBeClickable(WebElement webElement) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(webElement));
+	}
+
+	public void waitAnElementUntillBeClickable(List<WebElement> webElement) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.visibilityOfAllElements(webElement));
+	}
+
+	public void select_Egypt_Country() {
+		waitAnElementUntillBeClickable(country);
+		country.click();
+		country_list.click();
+		egypt.click();
+		goToWebsite.click();
+		Actions action = new Actions(driver);
+		action.moveToElement(driver.findElement(By.xpath("/html/body/div[1]/header/div/div[1]/div[3]/div/a[1]/span/span[2]/span[2]"))).perform();
+		english_Language.click();
+	}
+
+	public void openURL(String URL) {
+		driver.get(URL);
+	}
+
+	public void Take_List_String_To_Select_An_Item(List<WebElement> list, String text) {
+
+		int sizeOfList = list.size();
+		for (int i = 0; i < sizeOfList; i++) {
+			if (list.get(i).getText().equalsIgnoreCase(text)) {
+				list.get(i).click();
+				break;
+			}
+		}
+
+	}
+}

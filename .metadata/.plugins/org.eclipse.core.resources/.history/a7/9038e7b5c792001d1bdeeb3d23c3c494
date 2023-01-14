@@ -1,0 +1,55 @@
+package Automation_Task_Assessment_vois.Automation_Task_Assessment;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class HomePage {
+	WebDriver driver;
+
+	@BeforeMethod
+	public void Setup() {
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1024, 768));
+		System.out.println("- browser resolution = " + driver.manage().window().getSize());
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	}
+
+	@Test
+	public void TaskOne_FirstScenario() {
+		// -	Open amazon link “https://www.amazon.com/” then type " car accessories"
+		driver.get("https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A2230642011&ref_=nav_em__nav_desktop_sa_intl_car_electronics_accessories_0_2_9_3");
+		// -	Select the first Item
+		WebElement firstElement = driver.findElement(By.xpath("//img[@src='https://m.media-amazon.com/images/I/61N0w7azMDL._AC_UL320_.jpg'"));
+		// -	Add item to the cart
+		firstElement.click();
+		// -- wait till the add to cart button be clicable 
+		WebElement addToCartButton = driver.findElement(By.id("submit.add-to-cart"));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
+		addToCartButton.click();
+		// -	Go to the cart and check that item is added successfully
+		WebElement cartIcon = driver.findElement(By.id("nav-cart"));
+
+		
+
+	}
+
+	@AfterMethod
+	public void afterMethod() {
+		driver.quit();
+	}
+}

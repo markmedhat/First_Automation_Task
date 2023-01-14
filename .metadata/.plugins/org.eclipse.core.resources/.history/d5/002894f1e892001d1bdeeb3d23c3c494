@@ -1,0 +1,54 @@
+package tests;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import pages.ItemDetailsPage;
+import pages.TodayDealsPage;
+
+public class TodayDealsTest extends TestBase {
+	
+	TodayDealsPage todayDealsPage;
+	ItemDetailsPage itemDetailsPage;
+	@Test
+	public void TaskOne_SecondScenario() {
+
+		todayDealsPage = new TodayDealsPage(driver);
+		// - Open today's deals
+		todayDealsPage.openURL("https://www.amazon.com/gp/goldbox?ref_=nav_cs_gb");
+		// - from the left side filters select "Headphones" and "grocery"
+		
+		todayDealsPage.waitAnElementUntillBeClickable(todayDealsPage.Grocery);
+		todayDealsPage.clickOnGrocery();
+		todayDealsPage.waitAnElementUntillBeClickable(todayDealsPage.Headphones);
+		todayDealsPage.clickOnHeadphones();
+		// - from the discount part choose "10% off or more"
+		todayDealsPage.clickOnten_percentage_descount();
+		// - go to the fourth page then select any item and add it to the cart
+		todayDealsPage.clickOnthirdPage();
+		todayDealsPage.waitAnElementUntillBeClickable(todayDealsPage.fourthPage);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		todayDealsPage.clickOnfourthPage();
+		
+		WebElement element = driver.findElement(
+				By.xpath("//img[@src='https://m.media-amazon.com/images/I/41+7RdqEzXL._AC_UF226,226_FMjpg_.jpg']"));
+		// - Add item to the cart
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+		element.click();
+		// -- wait till the add to cart button be clicable
+		WebElement addToCartButton = driver.findElement(By.id("submit.add-to-cart"));
+		wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
+		addToCartButton.click();
+		checkcart("TREBLAB");
+	}
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-01-15T00:24:33 EET" name="void_automation_task" finished-at="2023-01-15T00:27:12 EET" duration-ms="159092">
+    <groups>
+    </groups>
+    <test started-at="2023-01-15T00:24:33 EET" name="void_automation_task_testcases" finished-at="2023-01-15T00:27:12 EET" duration-ms="159092">
+      <class name="tests.TodayDealsTest">
+        <test-method is-config="true" signature="beforeEachTestCase()[pri:0, instance:tests.TodayDealsTest@6574a52c]" started-at="2023-01-15T00:24:33 EET" name="beforeEachTestCase" finished-at="2023-01-15T00:24:38 EET" duration-ms="4720" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeEachTestCase -->
+        <test-method signature="TaskOne_SecondScenario()[pri:0, instance:tests.TodayDealsTest@6574a52c]" started-at="2023-01-15T00:24:38 EET" name="TaskOne_SecondScenario" finished-at="2023-01-15T00:26:18 EET" duration-ms="100660" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TaskOne_SecondScenario -->
+        <test-method is-config="true" signature="clearEnvironment()[pri:0, instance:tests.TodayDealsTest@6574a52c]" started-at="2023-01-15T00:26:18 EET" name="clearEnvironment" finished-at="2023-01-15T00:26:19 EET" duration-ms="445" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearEnvironment -->
+      </class> <!-- tests.TodayDealsTest -->
+      <class name="tests.CarAccessoriesTest">
+        <test-method is-config="true" signature="beforeEachTestCase()[pri:0, instance:tests.CarAccessoriesTest@738dc9b]" started-at="2023-01-15T00:26:19 EET" name="beforeEachTestCase" finished-at="2023-01-15T00:26:20 EET" duration-ms="1384" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeEachTestCase -->
+        <test-method signature="TaskOne_FirstScenario()[pri:0, instance:tests.CarAccessoriesTest@738dc9b]" started-at="2023-01-15T00:26:20 EET" name="TaskOne_FirstScenario" finished-at="2023-01-15T00:27:11 EET" duration-ms="51409" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TaskOne_FirstScenario -->
+        <test-method is-config="true" signature="clearEnvironment()[pri:0, instance:tests.CarAccessoriesTest@738dc9b]" started-at="2023-01-15T00:27:11 EET" name="clearEnvironment" finished-at="2023-01-15T00:27:12 EET" duration-ms="416" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearEnvironment -->
+      </class> <!-- tests.CarAccessoriesTest -->
+    </test> <!-- void_automation_task_testcases -->
+  </suite> <!-- void_automation_task -->
+</testng-results>

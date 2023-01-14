@@ -1,0 +1,11 @@
+package pages;
+
+import org.openqa.selenium.WebDriver;
+
+public class CarAccessoriesPage extends PageBase {
+
+	public CarAccessoriesPage(WebDriver driver) {
+		super(driver);
+	}
+
+}

@@ -1,0 +1,42 @@
+package pages;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class ItemDetailsPage extends PageBase {
+
+	public ItemDetailsPage(WebDriver driver) {
+		super(driver);
+	}
+
+	// elements
+	@FindBy(id = "submit.add-to-cart")
+	public WebElement addToCartButton;
+
+	//@FindBy(xpath = "//img[@src='https://m.media-amazon.com/images/I/41+7RdqEzXL._AC_UF226,226_FMjpg_.jpg']")
+	//public WebElement element;
+
+	@FindBy(xpath = "/html/body/div[1]/div[21]/div/div/div/div[2]/div[3]/div/div[1]/div/div/a/div")	
+	public WebElement element;
+
+	
+	// methods
+	public void clickOnaddToCartButton() {
+		addToCartButton.click();
+	}
+
+	public void clickOnAnElement() {
+		element.click();
+	}
+
+	public void waitAnElementUntillBeClickable(WebElement webElement) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(webElement));
+	}
+
+}

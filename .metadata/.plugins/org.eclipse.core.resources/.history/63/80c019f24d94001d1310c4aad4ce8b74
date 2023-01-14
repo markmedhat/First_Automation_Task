@@ -1,0 +1,45 @@
+package tests;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import pages.CarAccessoriesPage;
+import pages.CartPage;
+import pages.ItemDetailsPage;
+
+public class CarAccessoriesTest extends TestBase {
+
+	CarAccessoriesPage carAccessoriesPage;
+	ItemDetailsPage itemDetailsPage;
+	CartPage cartPage;
+
+	@Test
+	public void TaskOne_FirstScenario() {
+
+		carAccessoriesPage = new CarAccessoriesPage(driver);
+		itemDetailsPage = new ItemDetailsPage(driver);
+		cartPage = new CartPage(driver);
+		
+		// - Open amazon link “https://www.amazon.com/” then type " car accessories"
+		carAccessoriesPage.openURL(
+				"https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A2230642011&ref_=nav_em__nav_desktop_sa_intl_car_electronics_accessories_0_2_9_3");
+		carAccessoriesPage.select_unitedstate_deliverycountry();
+		// - Select the first Item 
+		carAccessoriesPage.clickOnFirstItem();
+		// -- wait till the add to cart button be clicable ->done find by
+		itemDetailsPage.waitAnElementUntillBeClickable(itemDetailsPage.addToCartButton);
+		itemDetailsPage.saveTitleToFile(itemDetailsPage.titleofSelectedItem);
+
+		// - Add item to the cart
+		itemDetailsPage.clickOnaddToCartButton();
+		// - Go to the cart and check that item is added successfully
+		//Assert.assertEquals(false, cartPage.checkcart())
+		
+	}
+}

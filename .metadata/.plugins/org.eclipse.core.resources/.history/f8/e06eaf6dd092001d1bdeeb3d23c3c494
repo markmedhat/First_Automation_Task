@@ -1,0 +1,99 @@
+package Automation_Task_Assessment_vois.Automation_Task_Assessment;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class HomePage {
+	WebDriver driver;
+
+	@BeforeMethod
+	public void Setup() {
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1024, 768));
+		System.out.println("- browser resolution = " + driver.manage().window().getSize());
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	}
+
+	@Test
+	public void TaskOne_FirstScenario() {
+		// -	Open amazon link “https://www.amazon.com/” then type " car accessories"
+		driver.get("https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A2230642011&ref_=nav_em__nav_desktop_sa_intl_car_electronics_accessories_0_2_9_3");
+		// -	Select the first Item
+		WebElement firstElement = driver.findElement(By.xpath("//img[@src='https://m.media-amazon.com/images/I/71j040wuMML._AC_UL320_.jpg']"));
+		// -	Add item to the cart
+		firstElement.click();
+		// -- wait till the add to cart button be clicable 
+		WebElement addToCartButton = driver.findElement(By.id("submit.add-to-cart"));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
+		addToCartButton.click();
+		// -	Go to the cart and check that item is added successfully
+		checkcart("NOUTAIU");
+	
+
+	}
+	
+	
+	@Test
+	public void TaskOne_SecondScenario()
+	{
+		//-	Open today's deals
+		driver.get("https://www.amazon.com/gp/goldbox?ref_=nav_cs_gb");
+		//-	from the left side filters select "Headphones" and "grocery"
+		WebElement Grocery = driver.findElement(By.xpath("/html/body/div[1]/div[21]/div/div/div/div[2]/div[2]/span[3]/ul/li[17]/label/span"));
+		WebElement Headphones = driver.findElement(By.xpath("/html/body/div[1]/div[21]/div/div/div/div[2]/div[2]/span[3]/ul/li[19]/label/span"));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(Grocery));
+		Grocery.click();
+		wait.until(ExpectedConditions.elementToBeClickable(Headphones));
+		Headphones.click();
+		//-	from the discount part choose "10% off or more"
+		WebElement ten_percentage_descount = driver.findElement(By.xpath("//span[contains(text(),'10% off or more')]"));
+		ten_percentage_descount.click();
+		//-	go to the fourth page then select any item and add it to the cart
+		WebElement thirdPage = driver.findElement(By.xpath("//a[@href='#' and contains(text(),'3')]"));
+		thirdPage.click();
+		WebElement fourthPage = driver.findElement(By.xpath("//a[@href='#' and contains(text(),'3')]"));
+		wait.until(ExpectedConditions.elementToBeClickable(fourthPage));
+		fourthPage.click();
+		WebElement element = driver.findElement(By.xpath("//img[@src='https://m.media-amazon.com/images/I/41+7RdqEzXL._AC_UF226,226_FMjpg_.jpg']"));
+		// -	Add item to the cart
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+		element.click();
+		// -- wait till the add to cart button be clicable 
+		WebElement addToCartButton = driver.findElement(By.id("submit.add-to-cart"));
+		wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
+		addToCartButton.click();
+		checkcart("Wireless");
+	}
+
+	
+	public void checkcart(String itemText)
+	{
+		// -	Go to the cart and check that item is added successfully
+				WebElement cartIcon = driver.findElement(By.id("nav-cart"));
+				cartIcon.click();
+				WebElement addedItem = driver.findElement(By.xpath("//span[contains(text(),'"+itemText+"')]"));
+				Assert.assertEquals(addedItem.isEnabled(), true);
+	}
+	
+	@AfterMethod
+	public void afterMethod() {
+		driver.quit();
+	}
+}
